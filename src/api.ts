@@ -6,6 +6,8 @@ const options = {
   },
 };
 
+const BASE_PATH = "https://api-football-v1.p.rapidapi.com/v3";
+
 interface IPlayer {
   id: number;
   name: string;
@@ -76,11 +78,91 @@ export interface IGetPlayers {
     total: number;
   };
   response: IPlayerResponse[];
+  num: number;
+  keyword: string;
 }
 
-export function getSearchPlayer(keyword: string) {
+export function getSearchPlayer(num: number, keyword: string) {
+  return fetch(`${BASE_PATH}/players?league=${num}&search=${keyword}`);
+}
+
+interface ITeam {
+  id: number;
+  name: string;
+  code: string;
+  country: string;
+  founded: number;
+  logo: string;
+}
+
+interface Ivenue {
+  id: number;
+  name: string;
+  address: string;
+  city: string;
+  image: string;
+}
+
+interface ITeamResponse {
+  team: ITeam[];
+  value: Ivenue[];
+}
+
+export interface IgetTeams {
+  get: string;
+  parameters: {
+    search: string;
+  };
+  results: number;
+  paging: {
+    current: number;
+    total: number;
+  };
+  response: ITeamResponse[];
+  keyword: string;
+}
+
+export function getSearchTeam(keyword: string) {
   return fetch(
     `https://api-football-v1.p.rapidapi.com/v3/teams?search=${keyword}`,
+    options
+  ).then((response) => response.json());
+}
+
+interface ILeague {
+  id: number;
+  name: string;
+  logo: string;
+}
+
+interface ICountry {
+  name: string;
+  code: string;
+  flag: string;
+}
+
+interface ISeasonResponse {
+  league: ILeague[];
+  country: ICountry[];
+}
+
+export interface IGetLeagues {
+  get: string;
+  parameters: {
+    search: string;
+  };
+  results: number;
+  paging: {
+    current: number;
+    total: number;
+  };
+  response: ISeasonResponse[];
+  keyword: string;
+}
+
+export function getSearchLeague(keyword: string) {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/leagues?search=${keyword}`,
     options
   ).then((response) => response.json());
 }
