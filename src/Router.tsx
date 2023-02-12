@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Home from "./Routes/Home";
-import SearchLeague from "./Routes/search/league";
-import SearchTeam from "./Routes/search/team";
-import SearchPlayer from "./Routes/search/player";
-
+import League from "./Routes/League";
+import Player from "./Routes/Player";
+import Search from "./Routes/search";
+import Team from "./Routes/Team";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,16 +15,20 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/search/league",
-        element: <SearchLeague />,
+        path: "/league",
+        element: <League />,
       },
       {
-        path: "/search/team",
-        element: <SearchTeam />,
+        path: "/team",
+        element: <Team />,
       },
       {
-        path: "/search/player",
-        element: <SearchPlayer />,
+        path: "/player",
+        element: <Player />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
     ],
   },

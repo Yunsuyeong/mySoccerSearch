@@ -23,6 +23,7 @@ const Col = styled.div`
 const Items = styled.ul`
   display: flex;
   align-items: center;
+  gap: 36px;
 `;
 
 const Item = styled.li`
@@ -39,11 +40,16 @@ const Item = styled.li`
   }
 `;
 
+const Title = styled.h1`
+  font-size: 48px;
+`;
+
 const Header = () => {
   return (
     <Nav>
       <Col>
         <Items>
+          <Title>A Simple Soccer Search Site</Title>
           <Item>
             <Link to="/">Home</Link>
           </Item>
