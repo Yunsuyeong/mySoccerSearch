@@ -1,3 +1,5 @@
+const BASE_PATH = "https://api-football-v1.p.rapidapi.com/v3";
+
 const options = {
   method: "GET",
   headers: {
@@ -5,8 +7,6 @@ const options = {
     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
   },
 };
-
-const BASE_PATH = "https://api-football-v1.p.rapidapi.com/v3";
 
 interface IPlayer {
   id: number;
@@ -82,10 +82,6 @@ export interface IGetPlayers {
   keyword: string;
 }
 
-export function getSearchPlayer(num: number, keyword: string) {
-  return fetch(`${BASE_PATH}/players?league=${num}&search=${keyword}`);
-}
-
 interface ITeam {
   id: number;
   name: string;
@@ -104,8 +100,8 @@ interface Ivenue {
 }
 
 interface ITeamResponse {
-  team: ITeam[];
-  value: Ivenue[];
+  team: ITeam;
+  value: Ivenue;
 }
 
 export interface IgetTeams {
@@ -122,13 +118,6 @@ export interface IgetTeams {
   keyword: string;
 }
 
-export function getSearchTeam(keyword: string) {
-  return fetch(
-    `https://api-football-v1.p.rapidapi.com/v3/teams?search=${keyword}`,
-    options
-  ).then((response) => response.json());
-}
-
 interface ILeague {
   id: number;
   name: string;
@@ -142,14 +131,14 @@ interface ICountry {
 }
 
 interface ISeasonResponse {
-  league: ILeague[];
-  country: ICountry[];
+  league: ILeague;
+  country: ICountry;
 }
 
 export interface IGetLeagues {
   get: string;
-  parameters: {
-    search: string;
+  parameters?: {
+    country?: string;
   };
   results: number;
   paging: {
@@ -157,12 +146,27 @@ export interface IGetLeagues {
     total: number;
   };
   response: ISeasonResponse[];
-  keyword: string;
+}
+
+export function getLeagues(): any {
+  return fetch(
+    "https://api-football-v1.p.rapidapi.com/v3/leagues",
+    options
+  ).then((response) => response.json());
 }
 
 export function getSearchLeague(keyword: string) {
   return fetch(
-    `https://api-football-v1.p.rapidapi.com/v3/leagues?search=${keyword}`,
-    options
+    `https://api-football-v1.p.rapidapi.com/v3/leagues?search=${keyword}`
   ).then((response) => response.json());
+}
+
+export function getSearchTeam(keyword: string) {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/teams?search=${keyword}`
+  ).then((response) => response.json());
+}
+
+export function getSearchPlayer(num: number, keyword: string) {
+  return fetch(`${BASE_PATH}/players?league=${num}&search=${keyword}`);
 }
