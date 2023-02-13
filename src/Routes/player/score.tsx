@@ -1,12 +1,6 @@
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import {
-  getEnglandScorers,
-  getGermanyScorers,
-  getItalyScorers,
-  getSpainScorers,
-  IGetPlayers,
-} from "../../api";
+import { getScorers, IGetPlayers } from "./api";
 
 const Banner = styled.div`
   width: 100vw;
@@ -67,19 +61,19 @@ const PTeam = styled.p`
 const Scorer = () => {
   const { data, isLoading } = useQuery<IGetPlayers>(
     ["players", "england"],
-    getEnglandScorers
+    () => getScorers(39)
   );
   const { data: spainData, isLoading: isLoading2 } = useQuery<IGetPlayers>(
     ["players", "spain"],
-    getSpainScorers
+    () => getScorers(140)
   );
   const { data: italyData, isLoading: isLoading3 } = useQuery<IGetPlayers>(
     ["players", "italy"],
-    getItalyScorers
+    () => getScorers(135)
   );
   const { data: germanyData, isLoading: isLoading4 } = useQuery<IGetPlayers>(
     ["players", "germany"],
-    getGermanyScorers
+    () => getScorers(78)
   );
   return (
     <Banner>
