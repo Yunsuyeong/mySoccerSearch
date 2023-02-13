@@ -5,7 +5,11 @@ import League from "./Routes/League";
 import Player from "./Routes/player";
 import Scorer from "./Routes/player/score";
 import Search from "./Routes/search";
-import Team from "./Routes/Team";
+import Team from "./Routes/team";
+import PremierTeams from "./Routes/team/39";
+import LaligaTeams from "./Routes/team/140";
+import SerieTeams from "./Routes/team/135";
+import BundesTeams from "./Routes/team/78";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +26,22 @@ const router = createBrowserRouter([
       {
         path: "/team",
         element: <Team />,
+      },
+      {
+        path: "/team/39",
+        element: <PremierTeams />,
+      },
+      {
+        path: "/team/140",
+        element: <LaligaTeams />,
+      },
+      {
+        path: "/team/135",
+        element: <SerieTeams />,
+      },
+      {
+        path: "/team/78",
+        element: <BundesTeams />,
       },
       {
         path: "/player",
