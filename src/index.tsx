@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { RouterProvider } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import router from "./Router";
@@ -69,12 +70,16 @@ a {
 }
 `;
 
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    <GlobalStyle />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <GlobalStyle />
+    </QueryClientProvider>
   </React.StrictMode>
 );

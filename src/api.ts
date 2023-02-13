@@ -11,6 +11,8 @@ const options = {
 interface IPlayer {
   id: number;
   name: string;
+  firstname: string;
+  lastname: string;
   age: number;
   birth: {
     date: string;
@@ -148,9 +150,37 @@ export interface IGetLeagues {
   response: ISeasonResponse[];
 }
 
-export function getLeagues(): any {
+export function getLeagues() {
   return fetch(
-    "https://api-football-v1.p.rapidapi.com/v3/leagues",
+    "https://api-football-v1.p.rapidapi.com/v3/leagues?country=england",
+    options
+  ).then((response) => response.json());
+}
+
+export function getEnglandScorers() {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=39&season=2022`,
+    options
+  ).then((response) => response.json());
+}
+
+export function getSpainScorers() {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=140&season=2022`,
+    options
+  ).then((response) => response.json());
+}
+
+export function getItalyScorers() {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=135&season=2022`,
+    options
+  ).then((response) => response.json());
+}
+
+export function getGermanyScorers() {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=78&season=2022`,
     options
   ).then((response) => response.json());
 }
