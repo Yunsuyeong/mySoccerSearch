@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { getTeams, IgetTeams } from "./api";
+import { useNavigate } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 
-const Banner = styled.div`
+const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100vw;
@@ -51,7 +53,7 @@ const PremierTeams = () => {
     getTeams(39)
   );
   return (
-    <Banner>
+    <Wrapper>
       <Cols>
         <Col>
           {data?.response.slice(0, 10).map((team) => (
@@ -70,7 +72,7 @@ const PremierTeams = () => {
           ))}
         </Col>
       </Cols>
-    </Banner>
+    </Wrapper>
   );
 };
 

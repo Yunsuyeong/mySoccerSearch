@@ -1,26 +1,24 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useMatch, useNavigate } from "react-router-dom";
 
-const Banner = styled.div`
+const Wrapper = styled.div`
   width: 100vw;
-  height: 150vh;
+  height: 100vh;
   background-color: black;
 `;
 
 const Cols = styled.div`
   position: relative;
+  top: 100px;
   display: flex;
   justify-content: center;
-  top: 100px;
 `;
 
 const Col = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  width: 60vw;
-  height: 100vh;
+  width: 80%;
 `;
 
 const Box = styled.div`
@@ -30,14 +28,14 @@ const Box = styled.div`
   background-color: white;
   color: black;
   font-size: 36px;
-  padding-top: 20px;
+  padding: 10px;
   cursor: pointer;
 `;
 
 const Team = () => {
   const navigate = useNavigate();
   return (
-    <Banner>
+    <Wrapper>
       <Cols>
         <Col>
           <Box onClick={() => navigate("/team/39")}>
@@ -54,7 +52,7 @@ const Team = () => {
           </Box>
         </Col>
       </Cols>
-    </Banner>
+    </Wrapper>
   );
 };
 
