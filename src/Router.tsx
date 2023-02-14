@@ -32,6 +32,14 @@ const router = createBrowserRouter([
         element: <PremierTeams />,
       },
       {
+        path: "/team/39/:teamId",
+        element: <PremierTeams />,
+      },
+      {
+        path: "/team/140",
+        element: <LaligaTeams />,
+      },
+      {
         path: "/team/140",
         element: <LaligaTeams />,
       },
@@ -40,7 +48,15 @@ const router = createBrowserRouter([
         element: <SerieTeams />,
       },
       {
+        path: "/team/135/:teamId",
+        element: <SerieTeams />,
+      },
+      {
         path: "/team/78",
+        element: <BundesTeams />,
+      },
+      {
+        path: "/team/78/:teamId",
         element: <BundesTeams />,
       },
       {

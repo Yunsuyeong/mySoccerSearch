@@ -20,6 +20,7 @@ interface Ivenue {
   name: string;
   address: string;
   city: string;
+  capacity: number;
   image: string;
 }
 
