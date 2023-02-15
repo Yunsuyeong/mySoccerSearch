@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useMatch, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100vw;

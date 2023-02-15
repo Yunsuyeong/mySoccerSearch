@@ -7,8 +7,6 @@ import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { makeImagePath } from "../../utils";
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
   width: 100vw;
   height: 150vh;
   background-color: black;
@@ -17,7 +15,7 @@ const Wrapper = styled.div`
 const Cols = styled.div`
   position: relative;
   display: flex;
-  position: relative;
+  justify-content: center;
   top: 150px;
 `;
 
