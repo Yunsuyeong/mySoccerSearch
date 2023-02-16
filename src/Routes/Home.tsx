@@ -1,27 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Banner = styled.div`
+const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
   background-color: black;
 `;
 
 const Cols = styled.div`
   position: relative;
-  top: -650px;
+  display: flex;
+  justify-content: center;
+  top: 200px;
 `;
 
 const Col = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 30px;
-  position: absolute;
-  width: 100%;
-  height: 80vh;
-  padding: 10px;
+  width: 80%;
 `;
 
 const Box = styled.div`
@@ -31,15 +28,14 @@ const Box = styled.div`
   background-color: white;
   color: black;
   font-size: 36px;
-  padding-top: 20px;
+  padding: 10px;
   cursor: pointer;
 `;
 
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <>
-      <Banner></Banner>
+    <Wrapper>
       <Cols>
         <Col>
           <Box onClick={() => navigate("/league")}>
@@ -53,7 +49,7 @@ const Home = () => {
           </Box>
         </Col>
       </Cols>
-    </>
+    </Wrapper>
   );
 };
 

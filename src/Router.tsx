@@ -10,6 +10,9 @@ import PremierTeams from "./Routes/team/39";
 import LaligaTeams from "./Routes/team/140";
 import SerieTeams from "./Routes/team/135";
 import BundesTeams from "./Routes/team/78";
+import TeamDetail from "./Routes/search/team";
+import LeagueDetail from "./Routes/search/league";
+import PlayerDetail from "./Routes/search/player";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,6 +73,30 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
+      },
+      {
+        path: "/search/league",
+        element: <LeagueDetail />,
+      },
+      {
+        path: "/search/league/:leagueId",
+        element: <LeagueDetail />,
+      },
+      {
+        path: "/search/team",
+        element: <TeamDetail />,
+      },
+      {
+        path: "/search/team/:teamId",
+        element: <TeamDetail />,
+      },
+      {
+        path: "/search/player",
+        element: <PlayerDetail />,
+      },
+      {
+        path: "/search/player/:playerId",
+        element: <PlayerDetail />,
       },
     ],
   },

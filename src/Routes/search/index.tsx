@@ -92,9 +92,6 @@ const Search = () => {
   const [searchParams, _] = useSearchParams();
   const keyword = searchParams.get("keyword");
   const navigate = useNavigate();
-  const leagueMatch = useMatch("/search/:leagueId");
-  const teamMatch = useMatch("/search/:teamId");
-  const playerMatch = useMatch("/search/:playerId");
   const { data: leagueData, isLoading } = useQuery<IGetLeagues>(
     ["search", "league"],
     () => getSearchLeague(keyword!)
@@ -115,7 +112,12 @@ const Search = () => {
             <Col>
               <Category>LEAGUE</Category>
               {leagueData?.response.slice(0, 5).map((league) => (
-                <Box key={league.league.id}>
+                <Box
+                  key={league.league.id}
+                  onClick={() =>
+                    navigate(`/search/league?id=${league.league.id}`)
+                  }
+                >
                   <Img src={league.league.logo} />
                   <Name>{league.league.name}</Name>
                 </Box>
@@ -126,7 +128,10 @@ const Search = () => {
             <Col>
               <Category>TEAM</Category>
               {teamData?.response.slice(0, 5).map((team) => (
-                <Box key={team.team.id}>
+                <Box
+                  key={team.team.id}
+                  onClick={() => navigate(`/search/team?id=${team.team.id}`)}
+                >
                   <Img src={team.team.logo} />
                   <Name>{team.team.name}</Name>
                 </Box>
@@ -137,7 +142,12 @@ const Search = () => {
             <Col>
               <Category>PLAYER</Category>
               {playerData?.response.slice(0, 5).map((player) => (
-                <Box key={player.player.id}>
+                <Box
+                  key={player.player.id}
+                  onClick={() =>
+                    navigate(`/search/player?id=${player.player.id}`)
+                  }
+                >
                   <Img src={player.player.photo} />
                   <Name>{player.player.name}</Name>
                 </Box>
