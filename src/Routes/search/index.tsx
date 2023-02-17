@@ -48,7 +48,6 @@ const Category = styled.h1`
 `;
 
 const Name = styled.h3`
-  width: 35%;
   font-size: 24px;
   margin-left: 10px;
 `;
