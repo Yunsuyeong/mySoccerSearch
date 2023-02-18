@@ -213,9 +213,30 @@ export function getSearchLeague(keyword: string) {
   ).then((response) => response.json());
 }
 
+export function getLeagueDetails(id: string) {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/leagues?id=${id}`,
+    options
+  ).then((response) => response.json());
+}
+
+export function getLeagueStanding(id: string) {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=${id}`,
+    options
+  ).then((response) => response.json());
+}
+
 export function getSearchTeam(keyword: string) {
   return fetch(
     `https://api-football-v1.p.rapidapi.com/v3/teams?search=${keyword}`,
+    options
+  ).then((response) => response.json());
+}
+
+export function getSearchPlayer(id: string, name: string) {
+  return fetch(
+    `${BASE_PATH}/players?league=${id}&search=${name}`,
     options
   ).then((response) => response.json());
 }

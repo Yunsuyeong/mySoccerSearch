@@ -2,14 +2,7 @@ import { motion } from "framer-motion";
 import { useMatch, useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import {
-  getSearchLeague,
-  getSearchPlayer,
-  getSearchTeam,
-  IGetLeagues,
-  IGetPlayers,
-  IgetTeams,
-} from "./api";
+import { getSearchLeague, getSearchTeam, IGetLeagues, IgetTeams } from "./api";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -99,10 +92,6 @@ const Search = () => {
     ["search", "team"],
     () => getSearchTeam(keyword!)
   );
-  const { data: playerData, isLoading: isLoading3 } = useQuery<IGetPlayers>(
-    ["search", "player"],
-    () => getSearchPlayer(61, keyword!)
-  );
   return (
     <>
       <Wrapper>
@@ -133,22 +122,6 @@ const Search = () => {
                 >
                   <Img src={team.team.logo} />
                   <Name>{team.team.name}</Name>
-                </Box>
-              ))}
-            </Col>
-          )}
-          {playerData !== undefined && (
-            <Col>
-              <Category>PLAYER</Category>
-              {playerData?.response.slice(0, 5).map((player) => (
-                <Box
-                  key={player.player.id}
-                  onClick={() =>
-                    navigate(`/search/player?id=${player.player.id}`)
-                  }
-                >
-                  <Img src={player.player.photo} />
-                  <Name>{player.player.name}</Name>
                 </Box>
               ))}
             </Col>

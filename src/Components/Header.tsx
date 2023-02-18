@@ -69,10 +69,6 @@ interface IForm {
   keyword: string;
 }
 
-const Title = styled.h1`
-  font-size: 48px;
-`;
-
 const Header = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, setFocus } = useForm<IForm>();

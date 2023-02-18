@@ -127,19 +127,3 @@ export function getScorers(num: number) {
     options
   ).then((response) => response.json());
 }
-
-export function getSearchLeague(keyword: string) {
-  return fetch(
-    `https://api-football-v1.p.rapidapi.com/v3/leagues?search=${keyword}`
-  ).then((response) => response.json());
-}
-
-export function getSearchTeam(keyword: string) {
-  return fetch(
-    `https://api-football-v1.p.rapidapi.com/v3/teams?search=${keyword}`
-  ).then((response) => response.json());
-}
-
-export function getSearchPlayer(num: number, keyword: string) {
-  return fetch(`${BASE_PATH}/players?league=${num}&search=${keyword}`);
-}

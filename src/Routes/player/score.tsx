@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useQuery } from "react-query";
 import { getScorers, IGetPlayers } from "./api";
 
-const Banner = styled.div`
+const Wrapper = styled.div`
   width: 100vw;
   height: 200vh;
   background-color: black;
@@ -76,7 +76,7 @@ const Scorer = () => {
     () => getScorers(78)
   );
   return (
-    <Banner>
+    <Wrapper>
       <Cols>
         <Col>
           <Ltitle>Premier League</Ltitle>
@@ -131,7 +131,7 @@ const Scorer = () => {
           ))}
         </Col>
       </Cols>
-    </Banner>
+    </Wrapper>
   );
 };
 

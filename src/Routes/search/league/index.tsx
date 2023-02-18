@@ -1,7 +1,9 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { getLeagueStanding, IGetStandings } from "./api";
+import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -12,6 +14,7 @@ const Wrapper = styled.div`
 const Cols = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   top: 100px;
@@ -19,7 +22,7 @@ const Cols = styled.div`
 
 const Col = styled.div`
   width: 80vw;
-  height: 90vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -34,6 +37,28 @@ const Box = styled.div`
   background-color: white;
   color: black;
   padding: 15px;
+`;
+
+const Search = styled.form`
+  color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+  svg {
+    height: 25px;
+    cursor: pointer;
+  }
+`;
+
+const Input = styled(motion.input)`
+  transform-origin: right center;
+  position: absolute;
+  right: 0px;
+  padding: 5px 10px;
+  padding-right: 20px;
+  font-size: 16px;
+  background-color: transparent;
+  border: 1px solid white;
 `;
 
 const StandingBox = styled.div`
@@ -87,13 +112,22 @@ const Tgoal = styled.h3`
   text-align: center;
 `;
 
+interface IForm {
+  name: string;
+}
+
 const LeagueDetail = () => {
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm<IForm>();
   const [searchParams, _] = useSearchParams();
   const leagueId = searchParams.get("id");
   const { data: StandingData, isLoading } = useQuery<IGetStandings>(
     ["league", "standings"],
     () => getLeagueStanding(leagueId!)
   );
+  const onValid = (data: IForm) => {
+    navigate(`/search/player?id=${leagueId}&name=${data.name}`);
+  };
   const Response = StandingData?.response;
   return (
     <Wrapper>
@@ -135,6 +169,27 @@ const LeagueDetail = () => {
               </StandingBox>
             </Box>
           ))}
+        </Col>
+        <Col>
+          <Box>
+            <Search onSubmit={handleSubmit(onValid)}>
+              <motion.svg
+                fill="black"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clipRule="evenodd"
+                ></path>
+              </motion.svg>
+              <Input
+                {...register("name", { required: true, minLength: 2 })}
+                placeholder="Search for Player"
+              />
+            </Search>
+          </Box>
         </Col>
       </Cols>
     </Wrapper>

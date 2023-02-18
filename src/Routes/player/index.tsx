@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Banner = styled.div`
+const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
   background-color: black;
 `;
 
 const Cols = styled.div`
   position: relative;
-  top: -650px;
+  top: 100px;
+  display: flex;
+  justify-content: center;
 `;
 
 const Col = styled.div`
@@ -38,8 +38,7 @@ const Box = styled.div`
 const Player = () => {
   const navigate = useNavigate();
   return (
-    <>
-      <Banner></Banner>
+    <Wrapper>
       <Cols>
         <Col>
           <Box onClick={() => navigate("/player/score")}>
@@ -47,7 +46,7 @@ const Player = () => {
           </Box>
         </Col>
       </Cols>
-    </>
+    </Wrapper>
   );
 };
 
