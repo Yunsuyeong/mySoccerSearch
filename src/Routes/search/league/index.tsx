@@ -1,12 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import {
-  IGetLeagues,
-  getLeagueDetails,
-  getLeagueStanding,
-  IGetStandings,
-} from "../api";
+import { getLeagueStanding, IGetStandings } from "./api";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -94,10 +89,10 @@ const Tgoal = styled.h3`
 
 const LeagueDetail = () => {
   const [searchParams, _] = useSearchParams();
-  const id = searchParams.get("id");
-  const { data: StandingData, isLoading: isLoading2 } = useQuery<IGetStandings>(
+  const leagueId = searchParams.get("id");
+  const { data: StandingData, isLoading } = useQuery<IGetStandings>(
     ["league", "standings"],
-    () => getLeagueStanding(id!)
+    () => getLeagueStanding(leagueId!)
   );
   const Response = StandingData?.response;
   return (
