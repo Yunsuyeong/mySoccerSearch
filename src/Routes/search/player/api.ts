@@ -18,7 +18,9 @@ interface IPlayer {
     date: string;
     country: string;
   };
+  nationality: string;
   height: string;
+  weight: string;
   photo: string;
 }
 
@@ -27,6 +29,11 @@ interface IStatistics {
     id: number;
     name: string;
     logo: string;
+  };
+  league: {
+    id: number;
+    name: string;
+    country: string;
   };
   games: {
     appearences: number;

@@ -29,24 +29,61 @@ const Box = styled.div`
   width: 100%;
   height: 90%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 10px;
   background-color: white;
   color: black;
+  padding: 20px;
+`;
+
+const PlayersBox = styled.div`
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 2px solid white;
+  background-color: gray;
   padding: 20px;
 `;
 
 const PlayerBox = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
   background-color: transparent;
 `;
 
 const Pname = styled.h3`
   font-size: 24px;
   font-weight: bold;
+`;
+
+const Pphoto = styled.img`
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+`;
+
+const Pbirth = styled.h3`
+  font-size: 24px;
+`;
+
+const PWeight = styled.h3`
+  font-size: 24px;
+`;
+
+const Tname = styled.h3`
+  font-size: 24px;
+  font-weight: bold;
+`;
+
+const Tphoto = styled.img`
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+`;
+
+const Tleague = styled.h3`
+  font-size: 20px;
 `;
 
 const PlayerDetail = () => {
@@ -58,16 +95,39 @@ const PlayerDetail = () => {
     () => getSearchPlayer(playerId!, playerName!)
   );
   const Response = DetailData?.response;
-  console.log(DetailData);
   return (
     <Wrapper>
       <Cols>
         <Col>
           {Response?.map((res) => (
             <Box>
-              <PlayerBox>
-                <Pname>{res.player.name}</Pname>
-              </PlayerBox>
+              <PlayersBox style={{ width: "30%" }}>
+                <PlayerBox>
+                  <Pphoto src={res.player.photo} />
+                  <Pname>{res.player.name}</Pname>
+                </PlayerBox>
+                <PlayerBox style={{ flexDirection: "column" }}>
+                  <Pbirth>
+                    {res.player.birth.date} ({res.player.age}),{" "}
+                    {res.player.nationality}
+                  </Pbirth>
+                  <PWeight>
+                    {res.player.height} {res.player.weight}
+                  </PWeight>
+                </PlayerBox>
+              </PlayersBox>
+              <PlayersBox style={{ width: "70%" }}>
+                <PlayerBox>
+                  <Tphoto src={res.statistics[0].team.logo} />
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <Tname>{res.statistics[0].team.name}</Tname>
+                    <Tleague>
+                      {res.statistics[0].league.name},{" "}
+                      {res.statistics[0].league.country}
+                    </Tleague>
+                  </div>
+                </PlayerBox>
+              </PlayersBox>
             </Box>
           ))}
         </Col>
