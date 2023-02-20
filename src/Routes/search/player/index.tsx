@@ -86,6 +86,30 @@ const Tleague = styled.h3`
   font-size: 20px;
 `;
 
+const DetailsBox = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background-color: white;
+  padding: 10px;
+`;
+
+const DetailBox = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  padding-top: 10px;
+  gap: 10px;
+`;
+
+const Pstats = styled.h3`
+  font-size: 18px;
+`;
+
 const PlayerDetail = () => {
   const [searchParams, _] = useSearchParams();
   const playerId = searchParams.get("id");
@@ -127,6 +151,85 @@ const PlayerDetail = () => {
                     </Tleague>
                   </div>
                 </PlayerBox>
+                <DetailsBox>
+                  <DetailBox>
+                    <Pstats>Appearences</Pstats>
+                    <Pstats>
+                      LineUp : {res.statistics[0].games.appearences}
+                    </Pstats>
+                    <Pstats>Minutes : {res.statistics[0].games.minutes}</Pstats>
+                    <Pstats>Rating : {res.statistics[0].games.rating}</Pstats>
+                  </DetailBox>
+                  <DetailBox>
+                    <Pstats>Goals</Pstats>
+                    <Pstats>Goal : {res.statistics[0].goals.total}</Pstats>
+                    <Pstats>Assist : {res.statistics[0].goals.assists}</Pstats>
+                  </DetailBox>
+                  <DetailBox>
+                    <Pstats>Passes</Pstats>
+                    <Pstats>Pass : {res.statistics[0].passes.total}</Pstats>
+                    <Pstats>Key pass : {res.statistics[0].passes.key}</Pstats>
+                    <Pstats>
+                      Accuracy : {res.statistics[0].passes.accuracy}%
+                    </Pstats>
+                  </DetailBox>
+                  <DetailBox>
+                    <Pstats>Dribbles</Pstats>
+                    <Pstats>
+                      Attempts : {res.statistics[0].dribbles.attempts}
+                    </Pstats>
+                    <Pstats>
+                      Success : {res.statistics[0].dribbles.success}
+                    </Pstats>
+                  </DetailBox>
+                  <DetailBox>
+                    <Pstats>Shots</Pstats>
+                    <Pstats>Shot : {res.statistics[0].shots.total}</Pstats>
+                    <Pstats>On : {res.statistics[0].shots.on}</Pstats>
+                  </DetailBox>
+                  <DetailBox>
+                    <Pstats>Tackles</Pstats>
+                    <Pstats>Tackle : {res.statistics[0].tackles.total}</Pstats>
+                    <Pstats>
+                      Block :{" "}
+                      {res.statistics[0].tackles.blocks == null
+                        ? 0
+                        : res.statistics[0].tackles.blocks}
+                    </Pstats>
+                    <Pstats>
+                      Interceptions :{" "}
+                      {res.statistics[0].tackles.interceptions == null
+                        ? 0
+                        : res.statistics[0].tackles.blocks}
+                    </Pstats>
+                  </DetailBox>
+                  <DetailBox>
+                    <Pstats>Fouls</Pstats>
+                    <Pstats>Drawn : {res.statistics[0].fouls.drawn}</Pstats>
+                    <Pstats>
+                      Committed : {res.statistics[0].fouls.committed}
+                    </Pstats>
+                  </DetailBox>
+                  <DetailBox>
+                    <Pstats>Cards</Pstats>
+                    <Pstats>Yellow : {res.statistics[0].cards.yellow}</Pstats>
+                    <Pstats>
+                      YellowRed : {res.statistics[0].cards.yellowred}
+                    </Pstats>
+                    <Pstats>Red : {res.statistics[0].cards.red}</Pstats>
+                  </DetailBox>
+                  <DetailBox>
+                    <Pstats>Penalty</Pstats>
+                    <Pstats>
+                      Won :{" "}
+                      {res.statistics[0].penalty.won == null
+                        ? 0
+                        : res.statistics[0].penalty.won}
+                    </Pstats>
+                    <Pstats>Scored : {res.statistics[0].penalty.scored}</Pstats>
+                    <Pstats>Missed : {res.statistics[0].penalty.missed}</Pstats>
+                  </DetailBox>
+                </DetailsBox>
               </PlayersBox>
             </Box>
           ))}

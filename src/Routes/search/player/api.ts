@@ -37,8 +37,13 @@ interface IStatistics {
   };
   games: {
     appearences: number;
+    minutes: number;
     position: string;
     rating: string;
+  };
+  shots: {
+    total: number;
+    on: number;
   };
   goals: {
     total: number;
@@ -46,16 +51,21 @@ interface IStatistics {
   };
   passes: {
     total: number;
+    key: number;
     accuracy: number;
+  };
+  dribbles: {
+    attempts: number;
+    success: number;
   };
   tackles: {
     total: number;
     blocks: string | null;
     interceptions: string | null;
   };
-  dribbles: {
-    attempts: number;
-    success: number;
+  fouls: {
+    drawn: number;
+    committed: number;
   };
   cards: {
     yellow: number;
