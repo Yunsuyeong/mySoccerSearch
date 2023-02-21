@@ -1,17 +1,19 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  color: white;
+  background-size: cover;
+  background-position: center center;
 `;
 
 const Cols = styled.div`
   position: relative;
+  top: 100px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  top: 200px;
 `;
 
 const Col = styled.div`
@@ -19,6 +21,12 @@ const Col = styled.div`
   flex-direction: column;
   gap: 30px;
   width: 80%;
+`;
+
+const Title = styled.h1`
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
 `;
 
 const Box = styled.div`
@@ -33,21 +41,16 @@ const Box = styled.div`
 `;
 
 const Home = () => {
-  const navigate = useNavigate();
   return (
-    <Wrapper>
+    <Wrapper
+      style={{
+        backgroundImage: `linear-gradient(to bottom, gray, transparent),
+                      url("https://images.pexels.com/photos/2291006/pexels-photo-2291006.jpeg")`,
+      }}
+    >
       <Cols>
-        <Col>
-          <Box onClick={() => navigate("/league")}>
-            <h1>LEAGUE</h1>
-          </Box>
-          <Box onClick={() => navigate("/team")}>
-            <h1>TEAM</h1>
-          </Box>
-          <Box onClick={() => navigate("/player")}>
-            <h1>PLAYER</h1>
-          </Box>
-        </Col>
+        <Title>Soccer Search</Title>
+        <Col></Col>
       </Cols>
     </Wrapper>
   );

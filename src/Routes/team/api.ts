@@ -6,6 +6,36 @@ const options = {
   },
 };
 
+interface ILeague {
+  id: number;
+  name: string;
+  logo: string;
+}
+
+interface ICountry {
+  name: string;
+  code: string;
+  flag: string;
+}
+
+interface ISeasonResponse {
+  league: ILeague;
+  country: ICountry;
+}
+
+export interface IGetLeagues {
+  get: string;
+  parameters?: {
+    country?: string;
+  };
+  results: number;
+  paging: {
+    current: number;
+    total: number;
+  };
+  response: ISeasonResponse[];
+}
+
 interface ITeam {
   id: number;
   name: string;
@@ -40,6 +70,13 @@ export interface IgetTeams {
     total: number;
   };
   response: ITeamResponse[];
+}
+
+export function getLeagues() {
+  return fetch(
+    "https://api-football-v1.p.rapidapi.com/v3/leagues",
+    options
+  ).then((response) => response.json());
 }
 
 export function getTeams(num: number) {

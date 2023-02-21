@@ -26,7 +26,7 @@ const Col = styled.div`
   margin-bottom: 30px;
 `;
 
-const Box = styled.div`
+const Box = styled(motion.div)`
   display: flex;
   align-items: center;
   background-color: white;
@@ -152,7 +152,11 @@ const BundesTeams = () => {
       <Cols>
         <Col>
           {data?.response.slice(0, 10).map((team) => (
-            <Box key={team.team.id} onClick={() => onTeamClick(team.team.id)}>
+            <Box
+              layoutId={team.team.id + ""}
+              key={team.team.id}
+              onClick={() => onTeamClick(team.team.id)}
+            >
               <TLogo src={team.team.logo} />
               <Tname>{team.team.name}</Tname>
             </Box>
@@ -160,7 +164,11 @@ const BundesTeams = () => {
         </Col>
         <Col>
           {data?.response.slice(10, 20).map((team) => (
-            <Box key={team.team.id} onClick={() => onTeamClick(team.team.id)}>
+            <Box
+              layoutId={team.team.id + ""}
+              key={team.team.id}
+              onClick={() => onTeamClick(team.team.id)}
+            >
               <TLogo src={team.team.logo} />
               <Tname>{team.team.name}</Tname>
             </Box>

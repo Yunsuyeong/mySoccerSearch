@@ -99,9 +99,6 @@ const Header = () => {
             <Link to="/">Home</Link>
           </Item>
           <Item>
-            <Link to="/league">League</Link>
-          </Item>
-          <Item>
             <Link to="/team">Team</Link>
           </Item>
           <Item>

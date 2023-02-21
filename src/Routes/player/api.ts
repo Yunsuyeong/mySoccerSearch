@@ -83,43 +83,6 @@ export interface IGetPlayers {
   num: number;
 }
 
-interface ILeague {
-  id: number;
-  name: string;
-  logo: string;
-}
-
-interface ICountry {
-  name: string;
-  code: string;
-  flag: string;
-}
-
-interface ISeasonResponse {
-  league: ILeague;
-  country: ICountry;
-}
-
-export interface IGetLeagues {
-  get: string;
-  parameters?: {
-    country?: string;
-  };
-  results: number;
-  paging: {
-    current: number;
-    total: number;
-  };
-  response: ISeasonResponse[];
-}
-
-export function getLeagues() {
-  return fetch(
-    "https://api-football-v1.p.rapidapi.com/v3/leagues?country=england",
-    options
-  ).then((response) => response.json());
-}
-
 export function getScorers(num: number) {
   return fetch(
     `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${num}&season=2022`,

@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Home from "./Routes/Home";
-import League from "./Routes/League";
 import Player from "./Routes/player";
 import Scorer from "./Routes/player/score";
 import Search from "./Routes/search";
@@ -22,10 +21,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-      },
-      {
-        path: "/league",
-        element: <League />,
       },
       {
         path: "/team",
