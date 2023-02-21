@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import { getScorers, IGetPlayers } from "./api";
+import { getCardCollectors, IGetPlayers } from "./api";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -44,7 +44,7 @@ const Pname = styled.h3`
   margin-left: 10px;
 `;
 
-const Pscore = styled.p`
+const Pcard = styled.p`
   width: 30%;
   font-size: 18px;
   margin-left: 20px;
@@ -56,20 +56,20 @@ const Pteam = styled.p`
   margin-left: 20px;
 `;
 
-const Scorer = () => {
+const Card = () => {
   const { data, isLoading } = useQuery<IGetPlayers>(
     ["players", "england"],
-    () => getScorers(39)
+    () => getCardCollectors(39)
   );
   const { data: spainData } = useQuery<IGetPlayers>(["players", "spain"], () =>
-    getScorers(140)
+    getCardCollectors(140)
   );
   const { data: italyData } = useQuery<IGetPlayers>(["players", "italy"], () =>
-    getScorers(135)
+    getCardCollectors(135)
   );
   const { data: germanyData } = useQuery<IGetPlayers>(
     ["players", "germany"],
-    () => getScorers(78)
+    () => getCardCollectors(78)
   );
   return (
     <Wrapper>
@@ -80,10 +80,11 @@ const Scorer = () => {
             data?.response.slice(0, 10).map((player) => (
               <Box key={player.player.id}>
                 <Pname>{player.player.name}</Pname>
-                <Pscore>
-                  {player.statistics[0].goals.total} Goals{" "}
-                  {player.statistics[0].games.appearences} Games
-                </Pscore>
+                <Pcard>
+                  {player.statistics[0].cards.red} Reds,{" "}
+                  {player.statistics[0].cards.yellow} Yellows
+                </Pcard>
+                <Pcard>{player.statistics[0].games.appearences} Games</Pcard>
                 <Pteam>{player.statistics[0].team.name}</Pteam>
               </Box>
             ))}
@@ -94,10 +95,11 @@ const Scorer = () => {
             spainData?.response.slice(0, 10).map((player) => (
               <Box key={player.player.id}>
                 <Pname>{player.player.name}</Pname>
-                <Pscore>
-                  {player.statistics[0].goals.total} Goals{" "}
-                  {player.statistics[0].games.appearences} Games
-                </Pscore>
+                <Pcard>
+                  {player.statistics[0].cards.red} Reds,{" "}
+                  {player.statistics[0].cards.yellow} Yellows
+                </Pcard>
+                <Pcard>{player.statistics[0].games.appearences} Games</Pcard>
                 <Pteam>{player.statistics[0].team.name}</Pteam>
               </Box>
             ))}
@@ -108,10 +110,11 @@ const Scorer = () => {
             italyData?.response.slice(0, 10).map((player) => (
               <Box key={player.player.id}>
                 <Pname>{player.player.name}</Pname>
-                <Pscore>
-                  {player.statistics[0].goals.total} Goals{" "}
-                  {player.statistics[0].games.appearences} Games
-                </Pscore>
+                <Pcard>
+                  {player.statistics[0].cards.red} Reds,{" "}
+                  {player.statistics[0].cards.yellow} Yellows
+                </Pcard>
+                <Pcard>{player.statistics[0].games.appearences} Games</Pcard>
                 <Pteam>{player.statistics[0].team.name}</Pteam>
               </Box>
             ))}
@@ -122,10 +125,11 @@ const Scorer = () => {
             germanyData?.response.slice(0, 10).map((player) => (
               <Box key={player.player.id}>
                 <Pname>{player.player.name}</Pname>
-                <Pscore>
-                  {player.statistics[0].goals.total} Goals{" "}
-                  {player.statistics[0].games.appearences} Games
-                </Pscore>
+                <Pcard>
+                  {player.statistics[0].cards.red} Reds,{" "}
+                  {player.statistics[0].cards.yellow} Yellows
+                </Pcard>
+                <Pcard>{player.statistics[0].games.appearences} Games</Pcard>
                 <Pteam>{player.statistics[0].team.name}</Pteam>
               </Box>
             ))}
@@ -135,4 +139,4 @@ const Scorer = () => {
   );
 };
 
-export default Scorer;
+export default Card;

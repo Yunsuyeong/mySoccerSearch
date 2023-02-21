@@ -5,6 +5,8 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: black;
+  background-size: cover;
+  background-position: center center;
 `;
 
 const Cols = styled.div`
@@ -15,13 +17,10 @@ const Cols = styled.div`
 `;
 
 const Col = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 30px;
-  position: absolute;
-  width: 100%;
-  height: 80vh;
-  padding: 10px;
+  width: 80%;
 `;
 
 const Box = styled.div`
@@ -38,11 +37,19 @@ const Box = styled.div`
 const Player = () => {
   const navigate = useNavigate();
   return (
-    <Wrapper>
+    <Wrapper
+      style={{
+        backgroundImage: `linear-gradient(to bottom, gray, transparent),
+                      url("https://images.pexels.com/photos/2291006/pexels-photo-2291006.jpeg")`,
+      }}
+    >
       <Cols>
         <Col>
           <Box onClick={() => navigate("/player/score")}>
-            <h1>Scorer</h1>
+            <h1>Top Scorer</h1>
+          </Box>
+          <Box onClick={() => navigate("/player/card")}>
+            <h1>Top Card Collector</h1>
           </Box>
         </Col>
       </Cols>

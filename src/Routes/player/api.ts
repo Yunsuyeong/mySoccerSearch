@@ -81,7 +81,6 @@ export interface IGetPlayers {
   };
   response: IPlayerResponse[];
   num: number;
-  keyword: string;
 }
 
 interface ILeague {
@@ -124,6 +123,13 @@ export function getLeagues() {
 export function getScorers(num: number) {
   return fetch(
     `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${num}&season=2022`,
+    options
+  ).then((response) => response.json());
+}
+
+export function getCardCollectors(num: number) {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/players/topredcards?league=${num}&season=2022`,
     options
   ).then((response) => response.json());
 }

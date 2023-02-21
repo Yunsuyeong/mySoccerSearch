@@ -13,6 +13,7 @@ import BundesTeams from "./Routes/team/78";
 import TeamDetail from "./Routes/search/team";
 import LeagueDetail from "./Routes/search/league";
 import PlayerDetail from "./Routes/search/player";
+import Card from "./Routes/player/card";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/player/score",
         element: <Scorer />,
+      },
+      {
+        path: "/player/card",
+        element: <Card />,
       },
       {
         path: "/search",
