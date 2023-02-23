@@ -72,9 +72,65 @@ export interface IgetTeams {
   response: ITeamResponse[];
 }
 
+interface IStandings {
+  rank: number;
+  team: {
+    id: number;
+    name: string;
+    logo: string;
+  };
+  points: number;
+  goalsDiff: number;
+  group: string;
+  all: {
+    played: number;
+    win: number;
+    draw: number;
+    lose: number;
+    goals: {
+      for: number;
+      against: number;
+    };
+  };
+}
+
+interface IStandingsArray {
+  0: IStandings[];
+}
+
+interface IStandingResponse {
+  league: {
+    id: number;
+    name: string;
+    logo: string;
+    standings: IStandingsArray;
+  };
+}
+
+export interface IGetStandings {
+  get: string;
+  parameters?: {
+    country?: string;
+  };
+  results: number;
+  paging: {
+    current: number;
+    total: number;
+  };
+  response: IStandingResponse[];
+  id: string;
+}
+
 export function getLeagues() {
   return fetch(
     "https://api-football-v1.p.rapidapi.com/v3/leagues",
+    options
+  ).then((response) => response.json());
+}
+
+export function getLeagueStanding(id: string) {
+  return fetch(
+    `https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=${id}`,
     options
   ).then((response) => response.json());
 }

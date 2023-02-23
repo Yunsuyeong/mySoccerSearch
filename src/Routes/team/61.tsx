@@ -88,13 +88,13 @@ const Tgoal = styled.h3`
   text-align: center;
 `;
 
-const BundesTeams = () => {
+const LigueTeams = () => {
   const navigate = useNavigate();
-  const { data: BundesData, isLoading } = useQuery<IGetStandings>(
-    ["league", "premier"],
-    () => getLeagueStanding("78")
+  const { data: LigueData, isLoading } = useQuery<IGetStandings>(
+    ["league", "serie"],
+    () => getLeagueStanding("61")
   );
-  const Response = BundesData?.response;
+  const Response = LigueData?.response;
   return (
     <Wrapper>
       <Cols>
@@ -144,4 +144,4 @@ const BundesTeams = () => {
   );
 };
 
-export default BundesTeams;
+export default LigueTeams;

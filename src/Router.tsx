@@ -13,6 +13,7 @@ import TeamDetail from "./Routes/search/team";
 import LeagueDetail from "./Routes/search/league";
 import PlayerDetail from "./Routes/search/player";
 import Card from "./Routes/player/card";
+import LigueTeams from "./Routes/team/61";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
       {
         path: "/team/78/:teamId",
         element: <BundesTeams />,
+      },
+      {
+        path: "/team/61",
+        element: <LigueTeams />,
+      },
+      {
+        path: "/team/61/:teamId",
+        element: <LigueTeams />,
       },
       {
         path: "/player",
