@@ -1,5 +1,5 @@
 import { motion, useAnimation } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -65,12 +65,27 @@ const Input = styled(motion.input)`
   border: 1px solid white;
 `;
 
+const Circle = styled(motion.span)`
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: red;
+`;
+
 interface IForm {
   keyword: string;
 }
 
 const Header = () => {
   const navigate = useNavigate();
+  const homeMatch = useMatch("/");
+  const teamMatch = useMatch("/team");
+  const playerMatch = useMatch("/player");
   const { register, handleSubmit, setFocus } = useForm<IForm>();
   const [searchOpen, setSearchOpen] = useState(false);
   const inputAnimation = useAnimation();
@@ -96,13 +111,17 @@ const Header = () => {
       <Col>
         <Items>
           <Item>
-            <Link to="/">Home</Link>
+            <Link to="/">Home {homeMatch && <Circle layoutId="circle" />}</Link>
           </Item>
           <Item>
-            <Link to="/team">Team</Link>
+            <Link to="/team">
+              Team {teamMatch && <Circle layoutId="circle" />}
+            </Link>
           </Item>
           <Item>
-            <Link to="/player">Player</Link>
+            <Link to="/player">
+              Player {playerMatch && <Circle layoutId="circle" />}
+            </Link>
           </Item>
         </Items>
       </Col>

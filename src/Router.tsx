@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <LaligaTeams />,
       },
       {
-        path: "/team/140",
+        path: "/team/140/:teamId",
         element: <LaligaTeams />,
       },
       {

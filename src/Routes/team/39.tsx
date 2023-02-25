@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import { getLeagueStanding, IGetStandings } from "./api";
+import { getLeagueStanding, getTeams, IGetStandings, IgetTeams } from "./api";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
+import { makeImagePath } from "../../utils";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -46,16 +48,16 @@ const StandingBox = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid white;
-  background-color: gray;
+  background-color: rgba(189, 195, 199, 1);
+  opacity: 0.8;
   padding: 20px;
 `;
 
-const TeamBox = styled.div`
+const TeamBox = styled(motion.div)`
   width: 100%;
   display: flex;
   align-items: center;
   background-color: transparent;
-  color: white;
   padding-top: 3px;
 `;
 
@@ -88,13 +90,104 @@ const Tgoal = styled.h3`
   text-align: center;
 `;
 
+const Overlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+`;
+
+const Bigbox = styled(motion.div)`
+  position: absolute;
+  background-color: black;
+  width: 50vw;
+  height: 80vh;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+`;
+
+const Bcover = styled.div`
+  position: relative;
+  width: 100%;
+  height: 50%;
+  background-size: cover;
+  background-position: center center;
+`;
+
+const Blogo = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+`;
+
+const Bname = styled.h3`
+  position: relative;
+  top: -60px;
+  color: white;
+  font-size: 36px;
+  padding: 10px;
+`;
+
+const InfoBox = styled.div`
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: purple;
+`;
+
+const Binfo = styled.p`
+  color: white;
+  font-size: 20px;
+  padding: 15px;
+`;
+
+const VenueBox = styled.div`
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgreen;
+`;
+
+const Bvenue = styled.p`
+  color: white;
+  font-size: 20px;
+  padding: 15px;
+`;
+
 const PremierTeams = () => {
   const navigate = useNavigate();
   const { data: PremierData, isLoading } = useQuery<IGetStandings>(
     ["league", "premier"],
     () => getLeagueStanding("39")
   );
+  const { data: PremierTeamData } = useQuery<IgetTeams>(
+    ["teams", "england"],
+    () => getTeams(39)
+  );
+  const { scrollY } = useScroll();
+  const teamMatch = useMatch("/team/39/:teamId");
   const Response = PremierData?.response;
+  const onBoxClick = (teamId: number) => {
+    navigate(`/team/39/${teamId}`);
+  };
+  const onOverlayClick = () => {
+    navigate("/team/39");
+  };
+  const clickedTeam =
+    teamMatch?.params.teamId &&
+    PremierTeamData?.response.find(
+      (team) => String(team.team.id) === teamMatch?.params.teamId
+    );
+  console.log(clickedTeam);
   return (
     <Wrapper>
       <Cols>
@@ -117,11 +210,13 @@ const PremierTeams = () => {
                 </TeamBox>
                 {res.league.standings[0].map((team) => (
                   <TeamBox
+                    onClick={() => onBoxClick(team.team.id)}
                     key={team.team.id}
                     style={{
                       borderBottom: "0.1px solid white",
                       cursor: "pointer",
                     }}
+                    layoutId={team.team.id + ""}
                   >
                     <Trank>{team.rank}</Trank>
                     <Tname>{team.team.name}</Tname>
@@ -140,6 +235,61 @@ const PremierTeams = () => {
           ))}
         </Col>
       </Cols>
+      <AnimatePresence>
+        {teamMatch ? (
+          <>
+            <Overlay
+              onClick={onOverlayClick}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+            <Bigbox
+              style={{ top: scrollY.get() + 100 }}
+              layoutId={teamMatch.params.teamId}
+            >
+              {clickedTeam && (
+                <>
+                  <Bcover
+                    style={{
+                      backgroundImage: `linear-gradient(to top, black, transparent),
+                  url(${makeImagePath(clickedTeam.venue.id)})
+                `,
+                    }}
+                  />
+                  <Bname>
+                    <Blogo src={clickedTeam.team.logo} />
+                    {clickedTeam.team.name}
+                  </Bname>
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "50%",
+                      display: "flex",
+                      justifyContent: "space-around",
+                    }}
+                  >
+                    <InfoBox>
+                      <Binfo style={{ fontSize: "24px", textAlign: "center" }}>
+                        Information
+                      </Binfo>
+                      <Binfo>Country : {clickedTeam.team.country}</Binfo>
+                      <Binfo>Founded : {clickedTeam.team.founded}</Binfo>
+                    </InfoBox>
+                    <VenueBox>
+                      <Bvenue style={{ fontSize: "24px", textAlign: "center" }}>
+                        Venue
+                      </Bvenue>
+                      <Bvenue>Name : {clickedTeam.venue.name}</Bvenue>
+                      <Bvenue>Address : {clickedTeam.venue.address}</Bvenue>
+                      <Bvenue>Capacity : {clickedTeam.venue.capacity}</Bvenue>
+                    </VenueBox>
+                  </div>
+                </>
+              )}
+            </Bigbox>
+          </>
+        ) : null}
+      </AnimatePresence>
     </Wrapper>
   );
 };
