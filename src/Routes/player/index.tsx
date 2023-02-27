@@ -6,30 +6,33 @@ import { useState } from "react";
 const Wrapper = styled.div`
   width: 100vw;
   height: 200vh;
-  background-color: black;
+  background-size: cover;
+  background-position: center center;
 `;
 
 const Cols = styled.div`
   position: relative;
   top: 100px;
   display: grid;
+  place-items: center;
   grid-template-columns: repeat(2, 1fr);
-  justify-content: space-around;
 `;
 
 const Col = styled.div`
   width: 45vw;
-  height: 70vh;
+  height: 80vh;
 `;
 
 const Box = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
-  background-color: white;
-  color: black;
-  border-bottom: 2px solid black;
-  cursor: pointer;
+  color: white;
+  background-color: rgba(144, 238, 144, 0.5);
   padding: 10px;
+  :hover {
+    font-weight: bold;
+  }
 `;
 
 const Ltitle = styled.h1`
@@ -42,25 +45,38 @@ const Ltitle = styled.h1`
 const Pname = styled.h3`
   width: 35%;
   font-size: 20px;
-  margin-left: 10px;
+  text-align: center;
 `;
 
 const Pscore = styled.p`
   width: 30%;
   font-size: 18px;
-  margin-left: 20px;
+  text-align: center;
 `;
 
 const Pcard = styled.p`
   width: 30%;
   font-size: 18px;
-  margin-left: 20px;
+  text-align: center;
 `;
 
 const Pteam = styled.p`
   width: 35%;
   font-size: 18px;
-  margin-left: 20px;
+  text-align: center;
+`;
+
+const Select = styled.select`
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #444;
+  background-color: #fff;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  margin: 0;
+  border: 1px solid #aaa;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
 `;
 
 const Player = () => {
@@ -96,14 +112,23 @@ const Player = () => {
   );
   const [category, setCategory] = useState("scorer");
   return (
-    <Wrapper>
-      <Cols style={{ top: "100px" }}>
-        <Col style={{ height: "10vh" }}>
-          <select onChange={(e) => setCategory(e.target.value)}>
-            <option value="Scorer">Top Scorer</option>
-            <option value="card">Top Card</option>
-          </select>
-        </Col>
+    <Wrapper
+      style={{
+        backgroundImage: `linear-gradient(to bottom, gray, transparent),
+                      url("https://images.pexels.com/photos/2291006/pexels-photo-2291006.jpeg")`,
+      }}
+    >
+      <Cols
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <Select onChange={(e) => setCategory(e.target.value)}>
+          <option value="Scorer">Top Scorer</option>
+          <option value="card">Top Card</option>
+        </Select>
       </Cols>
       <Cols>
         {category === "scorer" && (

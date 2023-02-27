@@ -4,22 +4,23 @@ import { useQuery } from "react-query";
 import { getLeagueStanding, getTeams, IGetStandings, IgetTeams } from "./api";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { makeImagePath } from "../../utils";
-import Select from "../../Components/Select";
 import { useState } from "react";
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
-  background-color: black;
+  height: 150vh;
+  background-size: cover;
+  background-position: center center;
 `;
 
 const Cols = styled.div`
   position: relative;
+  top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 100px;
+  gap: 20px;
 `;
 
 const Col = styled.div`
@@ -36,31 +37,30 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  color: black;
+  background-color: transparent;
+  color: white;
   padding: 15px;
 `;
 
 const StandingBox = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  border-bottom: 2px solid white;
-  background-color: rgba(189, 195, 199, 1);
-  opacity: 0.8;
-  padding: 20px;
+  background: transparent;
 `;
 
 const TeamBox = styled(motion.div)`
   width: 100%;
   display: flex;
-  align-items: center;
-  background-color: transparent;
-  padding-top: 3px;
+  font-weight: bold;
+  background-color: rgba(173, 216, 230, 0.5);
+  padding: 10px;
+  :hover {
+    font-weight: bold;
+  }
 `;
 
 const Lname = styled.h3`
@@ -75,7 +75,7 @@ const Trank = styled.h3`
 `;
 
 const Tname = styled.h3`
-  width: 15%;
+  width: 25%;
   font-size: 16px;
   text-align: center;
 `;
@@ -103,12 +103,13 @@ const Overlay = styled(motion.div)`
 
 const Bigbox = styled(motion.div)`
   position: absolute;
-  background-color: black;
   width: 50vw;
   height: 80vh;
   left: 0;
   right: 0;
   margin: 0 auto;
+  background-color: rgba(173, 216, 230, 0.8);
+  font-weight: 500;
   border-radius: 15px;
   overflow: hidden;
 `;
@@ -129,7 +130,7 @@ const Blogo = styled.img`
 
 const Bname = styled.h3`
   position: relative;
-  top: -60px;
+  top: -10px;
   color: white;
   font-size: 36px;
   padding: 10px;
@@ -141,7 +142,7 @@ const InfoBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: purple;
+  background-color: rgba(30, 139, 195, 0.8);
 `;
 
 const Binfo = styled.p`
@@ -156,13 +157,26 @@ const VenueBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: lightgreen;
+  background-color: rgba(0, 181, 204, 0.8);
 `;
 
 const Bvenue = styled.p`
   color: white;
   font-size: 20px;
   padding: 15px;
+`;
+
+const Select = styled.select`
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #444;
+  background-color: #fff;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  margin: 0;
+  border: 1px solid #aaa;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
 `;
 
 const Team = () => {
@@ -238,23 +252,33 @@ const Team = () => {
     );
   const [league, setLeague] = useState("Premier");
   return (
-    <Wrapper>
+    <Wrapper
+      style={{
+        backgroundImage: `linear-gradient(to bottom, gray, transparent),
+                      url("https://images.pexels.com/photos/2291006/pexels-photo-2291006.jpeg")`,
+      }}
+    >
       <Cols>
+        <Select onChange={(e) => setLeague(e.target.value)}>
+          <option value="Premier">Premier League</option>
+          <option value="Laliga">Laliga</option>
+          <option value="Serie">Serie A</option>
+          <option value="Bundes">Bundesliga</option>
+          <option value="Ligue">Ligue 1</option>
+        </Select>
         <Col>
-          <select onChange={(e) => setLeague(e.target.value)}>
-            <option value="Premier">Premier League</option>
-            <option value="Laliga">Laliga</option>
-            <option value="Serie">Serie A</option>
-            <option value="Bundes">Bundesliga</option>
-            <option value="Ligue">Ligue 1</option>
-          </select>
-
           {league === "Premier" && (
             <Box>
               <Lname>Premier League</Lname>
               {PremierData?.response?.map((res) => (
                 <StandingBox>
-                  <TeamBox style={{ marginBottom: "10px" }}>
+                  <TeamBox
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      fontWeight: "bold",
+                    }}
+                  >
                     <Trank>Rank</Trank>
                     <Tname>Team</Tname>
                     <Tall>Played</Tall>
@@ -271,7 +295,7 @@ const Team = () => {
                       onClick={() => navigate(`/team/39/${team.team.id}`)}
                       key={team.team.id}
                       style={{
-                        borderBottom: "0.1px solid white",
+                        borderBottom: "0.5px solid black",
                         cursor: "pointer",
                       }}
                       layoutId={team.team.id + ""}
@@ -297,7 +321,13 @@ const Team = () => {
               <Lname>Laliga</Lname>
               {LaLigaData?.response?.map((res) => (
                 <StandingBox>
-                  <TeamBox style={{ marginBottom: "10px" }}>
+                  <TeamBox
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      fontWeight: "bold",
+                    }}
+                  >
                     <Trank>Rank</Trank>
                     <Tname>Team</Tname>
                     <Tall>Played</Tall>
@@ -314,7 +344,7 @@ const Team = () => {
                       onClick={() => navigate(`/team/140/${team.team.id}`)}
                       key={team.team.id}
                       style={{
-                        borderBottom: "0.1px solid white",
+                        borderBottom: "0.5px solid black",
                         cursor: "pointer",
                       }}
                       layoutId={team.team.id + ""}
@@ -340,7 +370,13 @@ const Team = () => {
               <Lname>Serie A</Lname>
               {SerieData?.response?.map((res) => (
                 <StandingBox>
-                  <TeamBox style={{ marginBottom: "10px" }}>
+                  <TeamBox
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      fontWeight: "bold",
+                    }}
+                  >
                     <Trank>Rank</Trank>
                     <Tname>Team</Tname>
                     <Tall>Played</Tall>
@@ -357,7 +393,7 @@ const Team = () => {
                       onClick={() => navigate(`/team/135/${team.team.id}`)}
                       key={team.team.id}
                       style={{
-                        borderBottom: "0.1px solid white",
+                        borderBottom: "0.5px solid black",
                         cursor: "pointer",
                       }}
                       layoutId={team.team.id + ""}
@@ -383,7 +419,13 @@ const Team = () => {
               <Lname>Bundesliga</Lname>
               {BundesData?.response?.map((res) => (
                 <StandingBox>
-                  <TeamBox style={{ marginBottom: "10px" }}>
+                  <TeamBox
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      fontWeight: "bold",
+                    }}
+                  >
                     <Trank>Rank</Trank>
                     <Tname>Team</Tname>
                     <Tall>Played</Tall>
@@ -400,7 +442,7 @@ const Team = () => {
                       onClick={() => navigate(`/team/78/${team.team.id}`)}
                       key={team.team.id}
                       style={{
-                        borderBottom: "0.1px solid white",
+                        borderBottom: "0.5px solid black",
                         cursor: "pointer",
                       }}
                       layoutId={team.team.id + ""}
@@ -426,7 +468,13 @@ const Team = () => {
               <Lname>Ligue 1</Lname>
               {LigueData?.response?.map((res) => (
                 <StandingBox>
-                  <TeamBox style={{ marginBottom: "10px" }}>
+                  <TeamBox
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      fontWeight: "bold",
+                    }}
+                  >
                     <Trank>Rank</Trank>
                     <Tname>Team</Tname>
                     <Tall>Played</Tall>
@@ -443,7 +491,7 @@ const Team = () => {
                       onClick={() => navigate(`/team/61/${team.team.id}`)}
                       key={team.team.id}
                       style={{
-                        borderBottom: "0.1px solid white",
+                        borderBottom: "0.5px solid black",
                         cursor: "pointer",
                       }}
                       layoutId={team.team.id + ""}
