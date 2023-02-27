@@ -2,18 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Home from "./Routes/Home";
 import Player from "./Routes/player";
-import Scorer from "./Routes/player/score";
 import Search from "./Routes/search";
 import Team from "./Routes/team";
-import PremierTeams from "./Routes/team/39";
-import LaligaTeams from "./Routes/team/140";
-import SerieTeams from "./Routes/team/135";
-import BundesTeams from "./Routes/team/78";
 import TeamDetail from "./Routes/search/team";
 import LeagueDetail from "./Routes/search/league";
 import PlayerDetail from "./Routes/search/player";
-import Card from "./Routes/player/card";
-import LigueTeams from "./Routes/team/61";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,55 +22,47 @@ const router = createBrowserRouter([
       },
       {
         path: "/team/39",
-        element: <PremierTeams />,
+        element: <Team />,
       },
       {
         path: "/team/39/:teamId",
-        element: <PremierTeams />,
+        element: <Team />,
       },
       {
         path: "/team/140",
-        element: <LaligaTeams />,
+        element: <Team />,
       },
       {
         path: "/team/140/:teamId",
-        element: <LaligaTeams />,
+        element: <Team />,
       },
       {
         path: "/team/135",
-        element: <SerieTeams />,
+        element: <Team />,
       },
       {
         path: "/team/135/:teamId",
-        element: <SerieTeams />,
+        element: <Team />,
       },
       {
         path: "/team/78",
-        element: <BundesTeams />,
+        element: <Team />,
       },
       {
         path: "/team/78/:teamId",
-        element: <BundesTeams />,
+        element: <Team />,
       },
       {
         path: "/team/61",
-        element: <LigueTeams />,
+        element: <Team />,
       },
       {
         path: "/team/61/:teamId",
-        element: <LigueTeams />,
+        element: <Team />,
       },
       {
         path: "/player",
         element: <Player />,
-      },
-      {
-        path: "/player/score",
-        element: <Scorer />,
-      },
-      {
-        path: "/player/card",
-        element: <Card />,
       },
       {
         path: "/search",
