@@ -1,7 +1,15 @@
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import { getTeamsSquad, IgetSquads } from "./api";
+import {
+  getTeamsInfo,
+  getTeamsSquad,
+  getTeamsStats,
+  IgetSquads,
+  IGetStats,
+} from "./api";
+import { useState } from "react";
+import { IGetLeagues } from "../api";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -32,8 +40,8 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: white;
-  color: black;
+  background-color: transparent;
+  color: white;
   padding: 20px;
 `;
 
@@ -41,7 +49,6 @@ const TeamBox = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: transparent;
 `;
 
 const SquadBox = styled.div`
@@ -51,7 +58,8 @@ const SquadBox = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
-  background-color: gray;
+  font-weight: 500;
+  background-color: rgba(173, 216, 230, 0.5);
   padding: 20px;
 `;
 
@@ -66,12 +74,22 @@ const Tname = styled.h3`
   font-weight: bold;
 `;
 
+const Modebox = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+`;
+
+const Mode = styled.span`
+  font-size: 16px;
+  cursor: pointer;
+`;
+
 const PlayerBox = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: transparent;
 `;
 
 const Pname = styled.h3`
@@ -101,21 +119,47 @@ const TeamDetail = () => {
     ["team", "squads"],
     () => getTeamsSquad(teamId!)
   );
-  const Response = SquadData?.response;
+  const Response = SquadData?.response[0];
+  const { data: TeamData } = useQuery<IGetLeagues>(["league", "team"], () =>
+    getTeamsInfo(teamId!)
+  );
+  const leagueId = TeamData?.response[0].league.id.toString();
+  const { data: StatData } = useQuery(["team", "stats"], () =>
+    getTeamsStats(leagueId!, teamId!)
+  );
+  console.log(StatData);
+  const [mode, setMode] = useState("standings");
   return (
-    <Wrapper>
+    <Wrapper
+      style={{
+        backgroundImage: `url("https://wallpapercave.com/dwp2x/wp9116447.jpg")`,
+      }}
+    >
       <Cols>
         <Col>
-          {Response?.map((res) => (
-            <Box key={res.team.id}>
-              <TeamBox>
-                <Tlogo src={res.team.logo} />
-                <Tname>{res.team.name}</Tname>
-              </TeamBox>
+          <Box>
+            <TeamBox>
+              <Tlogo src={Response?.team.logo} />
+              <Tname>{Response?.team.name}</Tname>
+              <Modebox>
+                <Mode onClick={() => setMode("stats")}>Stats</Mode>
+                <Mode onClick={() => setMode("standings")}>Standings</Mode>
+              </Modebox>
+            </TeamBox>
+            {mode === "stats" && (
               <div style={{ display: "flex" }}>
                 <SquadBox>
-                  {res.players.map((player) => (
-                    <PlayerBox>
+                  <PlayerBox>
+                    <Page></Page>
+                  </PlayerBox>
+                </SquadBox>
+              </div>
+            )}
+            {mode === "standings" && (
+              <div style={{ display: "flex" }}>
+                <SquadBox>
+                  {Response?.players.map((player) => (
+                    <PlayerBox key={player.id}>
                       <Pphoto src={player.photo} />
                       <Pname>
                         {player.number}. {player.name}
@@ -126,8 +170,8 @@ const TeamDetail = () => {
                   ))}
                 </SquadBox>
               </div>
-            </Box>
-          ))}
+            )}
+          </Box>
         </Col>
       </Cols>
     </Wrapper>

@@ -7,17 +7,19 @@ import { motion } from "framer-motion";
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
-  background-color: black;
+  height: 150vh;
+  background-size: cover;
+  background-position: center center;
 `;
 
 const Cols = styled.div`
   position: relative;
+  top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 100px;
+  gap: 20px;
 `;
 
 const Col = styled.div`
@@ -34,8 +36,8 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  color: black;
+  background-color: transparent;
+  color: white;
   padding: 15px;
 `;
 
@@ -64,23 +66,22 @@ const Input = styled(motion.input)`
 const StandingBox = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  border-bottom: 2px solid white;
-  background-color: gray;
-  padding: 20px;
+  background-color: transparent;
 `;
 
 const TeamBox = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
-  background-color: transparent;
-  color: white;
-  padding-top: 3px;
+  font-weight: bold;
+  background-color: rgba(144, 238, 144, 0.5);
+  padding: 10px;
+  :hover {
+    font-weight: bold;
+  }
 `;
 
 const Lname = styled.h3`
@@ -125,19 +126,29 @@ const LeagueDetail = () => {
     ["league", "standings"],
     () => getLeagueStanding(leagueId!)
   );
+  const Response = StandingData?.response;
   const onValid = (data: IForm) => {
     navigate(`/search/player?id=${leagueId}&name=${data.name}`);
   };
-  const Response = StandingData?.response;
   return (
-    <Wrapper>
+    <Wrapper
+      style={{
+        backgroundImage: `url("https://wallpapercave.com/dwp2x/wp9116447.jpg")`,
+      }}
+    >
       <Cols>
         <Col>
           {Response?.map((res) => (
             <Box key={res.league.id}>
-              <Lname>{res.league.name}</Lname>
+              <Lname>{res.league.name} - Standings</Lname>
               <StandingBox>
-                <TeamBox style={{ marginBottom: "10px" }}>
+                <TeamBox
+                  style={{
+                    backgroundColor: "black",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
                   <Trank>Rank</Trank>
                   <Tname>Team</Tname>
                   <Tall>Played</Tall>
@@ -152,7 +163,7 @@ const LeagueDetail = () => {
                 {res.league.standings[0].map((team) => (
                   <TeamBox
                     key={team.team.id}
-                    style={{ borderBottom: "0.1px solid white" }}
+                    style={{ borderBottom: "0.5px solid white" }}
                   >
                     <Trank>{team.rank}</Trank>
                     <Tname>{team.team.name}</Tname>
@@ -174,7 +185,7 @@ const LeagueDetail = () => {
           <Box>
             <Search onSubmit={handleSubmit(onValid)}>
               <motion.svg
-                fill="black"
+                fill="white"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >

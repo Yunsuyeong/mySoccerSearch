@@ -15,12 +15,12 @@ const Nav = styled(motion.div)`
   font-size: 16px;
   padding: 20px 60px;
   z-index: 1;
-  background-color: white;
 `;
 
 const Col = styled.div`
   display: flex;
   align-items: center;
+  color: white;
 `;
 
 const Items = styled.ul`
@@ -30,7 +30,6 @@ const Items = styled.ul`
 
 const Item = styled.li`
   margin-right: 20px;
-  color: black;
   font-weight: bold;
   transition: color 0.3s ease-in-out;
   position: relative;
@@ -62,6 +61,7 @@ const Input = styled(motion.input)`
   z-index: -1;
   font-size: 16px;
   background-color: transparent;
+  color: white;
   border: 1px solid white;
 `;
 
@@ -130,7 +130,7 @@ const Header = () => {
           <motion.svg
             onClick={toggleSearch}
             animate={{ x: searchOpen ? -185 : 0 }}
-            fill="black"
+            fill="white"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
