@@ -76,11 +76,12 @@ const StandingBox = styled.div`
 const TeamBox = styled.div`
   width: 100%;
   display: flex;
-  font-weight: bold;
+  font-weight: 500;
   background-color: rgba(144, 238, 144, 0.5);
   padding: 10px;
   :hover {
     font-weight: bold;
+    background-color: rgba(144, 238, 144, 0.8);
   }
 `;
 

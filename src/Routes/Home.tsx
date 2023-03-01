@@ -58,8 +58,7 @@ const Home = () => {
   return (
     <Wrapper
       style={{
-        backgroundImage: `linear-gradient(to bottom, gray, transparent),
-                      url("https://images.pexels.com/photos/2291006/pexels-photo-2291006.jpeg")`,
+        backgroundImage: `url("https://wallpapercave.com/dwp2x/wp9116447.jpg")`,
       }}
     >
       <Cols>

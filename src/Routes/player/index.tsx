@@ -23,15 +23,17 @@ const Col = styled.div`
   height: 80vh;
 `;
 
-const Box = styled.div`
+const PlayerBox = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  font-weight: 500;
   color: white;
   background-color: rgba(144, 238, 144, 0.5);
   padding: 10px;
   :hover {
     font-weight: bold;
+    background-color: rgba(144, 238, 144, 0.8);
   }
 `;
 
@@ -114,8 +116,7 @@ const Player = () => {
   return (
     <Wrapper
       style={{
-        backgroundImage: `linear-gradient(to bottom, gray, transparent),
-                      url("https://images.pexels.com/photos/2291006/pexels-photo-2291006.jpeg")`,
+        backgroundImage: `url("https://wallpapercave.com/dwp2x/wp9116447.jpg")`,
       }}
     >
       <Cols
@@ -137,56 +138,56 @@ const Player = () => {
               <Ltitle>Premier League</Ltitle>
               {data?.response &&
                 data?.response.slice(0, 10).map((player) => (
-                  <Box key={player.player.id}>
+                  <PlayerBox key={player.player.id}>
                     <Pname>{player.player.name}</Pname>
                     <Pscore>
                       {player.statistics[0].goals.total} Goals{" "}
                       {player.statistics[0].games.appearences} Games
                     </Pscore>
                     <Pteam>{player.statistics[0].team.name}</Pteam>
-                  </Box>
+                  </PlayerBox>
                 ))}
             </Col>
             <Col>
               <Ltitle>La Liga</Ltitle>
               {spainData?.response &&
                 spainData?.response.slice(0, 10).map((player) => (
-                  <Box key={player.player.id}>
+                  <PlayerBox key={player.player.id}>
                     <Pname>{player.player.name}</Pname>
                     <Pscore>
                       {player.statistics[0].goals.total} Goals{" "}
                       {player.statistics[0].games.appearences} Games
                     </Pscore>
                     <Pteam>{player.statistics[0].team.name}</Pteam>
-                  </Box>
+                  </PlayerBox>
                 ))}
             </Col>
             <Col>
               <Ltitle>Serie A</Ltitle>
               {italyData?.response &&
                 italyData?.response.slice(0, 10).map((player) => (
-                  <Box key={player.player.id}>
+                  <PlayerBox key={player.player.id}>
                     <Pname>{player.player.name}</Pname>
                     <Pscore>
                       {player.statistics[0].goals.total} Goals{" "}
                       {player.statistics[0].games.appearences} Games
                     </Pscore>
                     <Pteam>{player.statistics[0].team.name}</Pteam>
-                  </Box>
+                  </PlayerBox>
                 ))}
             </Col>
             <Col>
               <Ltitle>Bundesliga</Ltitle>
               {germanyData?.response &&
                 germanyData?.response.slice(0, 10).map((player) => (
-                  <Box key={player.player.id}>
+                  <PlayerBox key={player.player.id}>
                     <Pname>{player.player.name}</Pname>
                     <Pscore>
                       {player.statistics[0].goals.total} Goals{" "}
                       {player.statistics[0].games.appearences} Games
                     </Pscore>
                     <Pteam>{player.statistics[0].team.name}</Pteam>
-                  </Box>
+                  </PlayerBox>
                 ))}
             </Col>
           </>
@@ -197,7 +198,7 @@ const Player = () => {
               <Ltitle>Premier League</Ltitle>
               {englandCardData?.response &&
                 englandCardData?.response.slice(0, 10).map((player) => (
-                  <Box key={player.player.id}>
+                  <PlayerBox key={player.player.id}>
                     <Pname>{player.player.name}</Pname>
                     <Pcard>
                       {player.statistics[0].cards.red} Reds,{" "}
@@ -207,14 +208,14 @@ const Player = () => {
                       {player.statistics[0].games.appearences} Games
                     </Pcard>
                     <Pteam>{player.statistics[0].team.name}</Pteam>
-                  </Box>
+                  </PlayerBox>
                 ))}
             </Col>
             <Col>
               <Ltitle>La Liga</Ltitle>
               {spainCardData?.response &&
                 spainCardData?.response.slice(0, 10).map((player) => (
-                  <Box key={player.player.id}>
+                  <PlayerBox key={player.player.id}>
                     <Pname>{player.player.name}</Pname>
                     <Pcard>
                       {player.statistics[0].cards.red} Reds,{" "}
@@ -224,14 +225,14 @@ const Player = () => {
                       {player.statistics[0].games.appearences} Games
                     </Pcard>
                     <Pteam>{player.statistics[0].team.name}</Pteam>
-                  </Box>
+                  </PlayerBox>
                 ))}
             </Col>
             <Col>
               <Ltitle>Serie A</Ltitle>
               {italyCardData?.response &&
                 italyCardData?.response.slice(0, 10).map((player) => (
-                  <Box key={player.player.id}>
+                  <PlayerBox key={player.player.id}>
                     <Pname>{player.player.name}</Pname>
                     <Pcard>
                       {player.statistics[0].cards.red} Reds,{" "}
@@ -241,14 +242,14 @@ const Player = () => {
                       {player.statistics[0].games.appearences} Games
                     </Pcard>
                     <Pteam>{player.statistics[0].team.name}</Pteam>
-                  </Box>
+                  </PlayerBox>
                 ))}
             </Col>
             <Col>
               <Ltitle>Bundesliga</Ltitle>
               {germanyCardData?.response &&
                 germanyCardData?.response.slice(0, 10).map((player) => (
-                  <Box key={player.player.id}>
+                  <PlayerBox key={player.player.id}>
                     <Pname>{player.player.name}</Pname>
                     <Pcard>
                       {player.statistics[0].cards.red} Reds,{" "}
@@ -258,7 +259,7 @@ const Player = () => {
                       {player.statistics[0].games.appearences} Games
                     </Pcard>
                     <Pteam>{player.statistics[0].team.name}</Pteam>
-                  </Box>
+                  </PlayerBox>
                 ))}
             </Col>
           </>

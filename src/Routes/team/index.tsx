@@ -49,17 +49,18 @@ const StandingBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: transparent;
+  background-color: transparent;
 `;
 
 const TeamBox = styled(motion.div)`
   width: 100%;
   display: flex;
-  font-weight: bold;
+  font-weight: 500;
   background-color: rgba(173, 216, 230, 0.5);
   padding: 10px;
   :hover {
     font-weight: bold;
+    background-color: rgba(173, 216, 230, 0.8);
   }
 `;
 
@@ -108,6 +109,7 @@ const Bigbox = styled(motion.div)`
   left: 0;
   right: 0;
   margin: 0 auto;
+  color: white;
   background-color: rgba(173, 216, 230, 0.8);
   font-weight: 500;
   border-radius: 15px;
@@ -131,7 +133,6 @@ const Blogo = styled.img`
 const Bname = styled.h3`
   position: relative;
   top: -10px;
-  color: white;
   font-size: 36px;
   padding: 10px;
 `;
@@ -254,8 +255,7 @@ const Team = () => {
   return (
     <Wrapper
       style={{
-        backgroundImage: `linear-gradient(to bottom, gray, transparent),
-                      url("https://images.pexels.com/photos/2291006/pexels-photo-2291006.jpeg")`,
+        backgroundImage: `url("https://wallpapercave.com/dwp2x/wp9116447.jpg")`,
       }}
     >
       <Cols>

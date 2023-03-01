@@ -61,8 +61,7 @@ const Img = styled.img`
 `;
 
 const Search = () => {
-  return null;
-  /* const [searchParams, _] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
   const keyword = searchParams.get("keyword");
   const navigate = useNavigate();
   const { data: leagueData, isLoading } = useQuery<IGetLeagues>(
@@ -117,7 +116,7 @@ const Search = () => {
         </Cols>
       </Wrapper>
     </>
-  ); */
+  );
 };
 
 export default Search;
